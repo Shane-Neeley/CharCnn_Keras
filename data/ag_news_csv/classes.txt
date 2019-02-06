@@ -2,11 +2,3 @@ World
 Sports
 Business
 Sci/Tech
-
-VariantLocation
-Condition
-Gene
-Mutation
-Finding
-Drug
-...
