@@ -6,9 +6,17 @@ from models.char_cnn_zhang import CharCNNZhang
 from models.char_cnn_kim import CharCNNKim
 from models.char_tcn import CharTCN
 
+import matplotlib.pyplot as plt
+
+# https://github.com/dmlc/xgboost/issues/1715
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
+
 tf.flags.DEFINE_string("model", "char_cnn_zhang", "Specifies which model to use: char_cnn_zhang or char_cnn_kim")
 FLAGS = tf.flags.FLAGS
-FLAGS._parse_flags()
+# FLAGS._parse_flags()
+import sys
+FLAGS(sys.argv)
 
 if __name__ == "__main__":
     # Load configurations
@@ -67,4 +75,5 @@ if __name__ == "__main__":
                 validation_labels=validation_labels,
                 epochs=config["training"]["epochs"],
                 batch_size=config["training"]["batch_size"],
-                checkpoint_every=config["training"]["checkpoint_every"])
+                # checkpoint_every=config["training"]["checkpoint_every"]
+                )

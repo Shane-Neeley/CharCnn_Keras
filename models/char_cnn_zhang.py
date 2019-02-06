@@ -6,6 +6,7 @@ from keras.layers import Embedding
 from keras.layers import ThresholdedReLU
 from keras.layers import Dropout
 from keras.callbacks import TensorBoard
+import matplotlib.pyplot as plt
 
 
 class CharCNNZhang(object):
@@ -101,12 +102,21 @@ class CharCNNZhang(object):
                                   embeddings_layer_names=None)
         # Start training
         print("Training CharCNNZhang model: ")
-        self.model.fit(training_inputs, training_labels,
+        r = self.model.fit(training_inputs, training_labels,
                        validation_data=(validation_inputs, validation_labels),
                        epochs=epochs,
                        batch_size=batch_size,
                        verbose=2,
-                       callbacks=[tensorboard])
+                       # callbacks=[tensorboard]
+                       )
+
+        # plot some data
+        plt.plot(r.history['loss'], label='loss')
+        plt.plot(r.history['val_loss'], label='val_loss')
+        plt.legend()
+        plt.show()
+        plt.savefig('./logs/training.png')
+
 
     def test(self, testing_inputs, testing_labels, batch_size):
         """
